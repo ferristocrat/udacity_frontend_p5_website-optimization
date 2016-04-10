@@ -1,5 +1,6 @@
 # Website Performance Optimization
 Udacity Front End Web Development - Project 5: Website Optimization
+
 ## Synopsis
 
 This is my fifth of a series of projects through Udacity's **Front End Web Development** course, through which I have been reviewing web fundamentals including HTML5, CSS and JavaScript.  This project involves optimizing this online portfolio for speed.

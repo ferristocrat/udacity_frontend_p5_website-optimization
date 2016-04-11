@@ -410,6 +410,11 @@ var resizePizzas = function(size) {
     for (i=0; i < lengthList; i++) {
       pizzaContainerList[i].style.width = pizzaWidth;
     }
+    // User Timing API is awesome
+    window.performance.mark("mark_end_resize");
+    window.performance.measure("measure_pizza_resize", "mark_start_resize", "mark_end_resize");
+    var timeToResize = window.performance.getEntriesByName("measure_pizza_resize");
+    console.log("Time to resize pizzas: " + timeToResize[timeToResize.length-1].duration + "ms");
   }
   var applyChanges = function() {
     
@@ -417,37 +422,30 @@ var resizePizzas = function(size) {
   switch(size) {
     case "1":
       console.log('Small');
-      document.querySelector("#pizzaSize").innerHTML = "Small";
+      document.getElementById("pizzaSize").innerHTML = "Small";
       assignWidth("292px");
       return;
     case "2":
       console.log('Medium');
-      document.querySelector("#pizzaSize").innerHTML = "Medium";
+      document.getElementById("pizzaSize").innerHTML = "Medium";
       assignWidth("390px");
       return;
     case "3":
       console.log('Large');
-      document.querySelector("#pizzaSize").innerHTML = "Large";
+      document.getElementById("pizzaSize").innerHTML = "Large";
       assignWidth("585px");
       return;
     default:
       console.log("bug somewhere");
       return;
   }
-
-  // User Timing API is awesome
-  window.performance.mark("mark_end_resize");
-  window.performance.measure("measure_pizza_resize", "mark_start_resize", "mark_end_resize");
-  var timeToResize = window.performance.getEntriesByName("measure_pizza_resize");
-  console.log('test');
-  console.log("Time to resize pizzas: " + timeToResize[timeToResize.length-1].duration + "ms");
 };
 
 window.performance.mark("mark_start_generating"); // collect timing data
 
 // This for-loop actually creates and appends all of the pizzas when the page loads
+var pizzasDiv = document.getElementById("randomPizzas");
 for (var i = 2; i < 100; i++) {
-  var pizzasDiv = document.getElementById("randomPizzas");
   pizzasDiv.appendChild(pizzaElementGenerator(i));
 }
 
